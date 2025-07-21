@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Sanity Clean Content Studio
 
 Congratulations, you have now installed the Sanity Content Studio, an open-source real-time content editing environment connected to the Sanity backend.
@@ -11,4 +10,3 @@ Now you can do the following things:
 =======
 # studio-personal-portfolio
 daylene
->>>>>>> f060926e84b97cbccf04864667c0d5076ccc3d07
