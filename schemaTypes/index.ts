@@ -1,1 +1,2 @@
-export const schemaTypes = []
+import {portofolioType} from './portofolioTypes'
+export const schemaTypes = [portofolioType]
