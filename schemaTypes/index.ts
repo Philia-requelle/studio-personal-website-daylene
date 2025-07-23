@@ -1,2 +1,3 @@
-import {portofolioType} from './portofolioTypes'
-export const schemaTypes = [portofolioType]
+import { aboutType } from './aboutTypes'
+import {portfolioType} from './portfolioType'
+export const schemaTypes = [portfolioType, aboutType]
