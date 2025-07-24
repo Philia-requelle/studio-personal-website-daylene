@@ -1,5 +1,5 @@
 import {defineField, defineType, defineArrayMember} from 'sanity'
-import {CaseIcon, ImageIcon, LinkIcon, TagIcon} from '@sanity/icons'
+import {CaseIcon, DocumentsIcon, TagIcon} from '@sanity/icons'
 
 export const portfolioType = defineType({
   name: 'portfolio',
@@ -9,7 +9,7 @@ export const portfolioType = defineType({
   groups: [
     {name: 'basic', title: 'Basic Info', icon: CaseIcon, default: true},
     {name: 'details', title: 'Project Details', icon: TagIcon},
-    {name: 'media', title: 'Images & Links', icon: ImageIcon},
+    {name: 'media', title: 'Images & Links', icon: DocumentsIcon},
   ],
   fields: [
     // Basic Information
@@ -104,45 +104,13 @@ export const portfolioType = defineType({
       group: 'media',
       description: 'Live demo, repository, or other relevant links',
       of: [
-        defineArrayMember({
-          type: 'object',
-          icon: LinkIcon,
-          fields: [
-            defineField({
-              name: 'title',
-              type: 'string',
-              validation: (rule) => rule.required(),
+        {
+          type: 'url',
+          validation: (Rule) =>
+            Rule.uri({
+              scheme: ['http', 'https'],
             }),
-            defineField({
-              name: 'url',
-              type: 'url',
-              validation: (rule) => rule.required(),
-            }),
-            defineField({
-              name: 'type',
-              type: 'string',
-              options: {
-                list: [
-                  {title: 'Live Demo', value: 'demo'},
-                  {title: 'Source Code', value: 'code'},
-                  {title: 'Case Study', value: 'case-study'},
-                  {title: 'Other', value: 'other'},
-                ],
-              },
-              initialValue: 'demo',
-            }),
-          ],
-          preview: {
-            select: {title: 'title', subtitle: 'type', url: 'url'},
-            prepare(selection) {
-              const {title, subtitle, url} = selection
-              return {
-                title: title,
-                subtitle: `${subtitle} - ${url}`,
-              }
-            },
-          },
-        }),
+        },
       ],
     }),
   ],
