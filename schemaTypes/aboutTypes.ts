@@ -133,17 +133,18 @@ export const aboutType = defineType({
             prepare(selection) {
               const {title, institution, startDate, endDate, isCurrent} = selection
 
-              const getYear = (dateString: string) => {
+              const formatDate = (dateString: string) => {
                 if (!dateString) return ''
-                return new Date(dateString).getFullYear()
+                const date = new Date(dateString)
+                return date.toLocaleDateString('en-US', {month: 'short', year: 'numeric'})
               }
 
-              const startYear = getYear(startDate)
-              const endYear = isCurrent ? 'Present' : getYear(endDate)
+              const start = formatDate(startDate)
+              const end = isCurrent ? 'Present' : formatDate(endDate)
 
               return {
                 title: `${title} - ${institution}`,
-                subtitle: `${startYear} - ${endYear}`,
+                subtitle: `${start} - ${end}`,
               }
             },
           },
@@ -184,7 +185,7 @@ export const aboutType = defineType({
               type: 'image',
               options: {hotspot: true},
               validation: (rule) => rule.required(),
-            })
+            }),
           ],
           preview: {
             select: {title: 'name', media: 'icon'},
